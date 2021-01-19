@@ -1,4 +1,4 @@
 # Codewars_TS
-A repo for housing my Codewars solutions in Typescript.
+<a href="https://www.codewars.com/users/VinceDeslo" target="_blank"> <img src="https://www.codewars.com/users/VinceDeslo/badges/small" alt="Codewars"/></a>
 
-Profile: https://www.codewars.com/users/VinceDeslo
+A repo for housing my Codewars solutions in Typescript.
