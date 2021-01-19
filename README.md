@@ -1,2 +1,2 @@
 # Codewars_TS
-A repo for housing my Codewars solutions.
+A repo for housing my Codewars solutions in Typescript.
