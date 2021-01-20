@@ -8,9 +8,7 @@ export class Challenge {
         for(let i=0; i<number; i++){
 
             // Verify multiples
-            if(i % 3 === 0) sum += i;
-            else if(i % 5 === 0) sum += i;
-            else;
+            if(i % 3 === 0 || i % 5 === 0) sum += i;
         }
         return sum;
     }
