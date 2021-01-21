@@ -78,9 +78,6 @@ class Bt {
                 // Check if array encapsulates objects with an id prop
                 else if (data as object[]){
 
-                    // Fetch the type
-                    let dataType = typeof data[0];
-                    
                     // If id is lower, populate left branch
                     if(data[0].id < (curr.data[0] as typeof data[0]).id){
                         
