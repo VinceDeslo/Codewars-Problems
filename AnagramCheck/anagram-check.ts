@@ -19,7 +19,7 @@ function isAnagram(string1: string, string2: string): boolean {
     return false;
 }
 
-// Function to count characters in a string (O(n))
+// Function to count characters in a string (O(nlogn))
 function getCounts(str: string): Record<string, number>{
 
     // Obtain an object of keys <'char': cnt> from string
