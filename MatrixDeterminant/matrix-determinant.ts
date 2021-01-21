@@ -1,8 +1,5 @@
 export function determinant(matrix: number[][]) {
     
-    // Cover the 2x2 case matrix
-    if(matrix[0].length == 2) return det(matrix);
-    
     // Initialize a result variable
     let res: number = 0;
     let sign: number = -1;
@@ -17,7 +14,7 @@ export function determinant(matrix: number[][]) {
         if(i % 2) res += exp*sign;
     }
 
-    //
+    // Default return (2x2)
     return det(matrix);
 }
 
