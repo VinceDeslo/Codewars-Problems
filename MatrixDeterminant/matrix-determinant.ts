@@ -4,17 +4,24 @@ export function determinant(matrix: number[][]) {
     let res: number = 0;
     let sign: number = -1;
 
-    // 2x2 guard
+    // 2x2 matrix guard
     if(matrix[0].length === 2) return det(matrix);
 
-    // Iterate over the columns
-    for(let i=0; i < matrix[0].length; i++){
+    // Clone the matrix
+    let copy = [...matrix];
 
-        // Multiply by the sign according to position
-        if(i % 2) sign*=-1;
+    // Iterate over the rows
+    for(let i=0; i < matrix.length; i++){
 
-        // Calculate the minor determinant (cofactor)
-        res += sign*getCofact(matrix, 0, i);
+        // Iterate over the columns
+        for (let j=0; j< matrix[i].length; j++){
+
+            // Multiply by the sign according to position
+            if(i % 2) sign*=-1;
+
+            // Calculate the minor determinant (cofactor)
+            res += sign*getCofact(copy, i, j);
+        }
     }
 
     // Default return (2x2)
@@ -31,22 +38,22 @@ function det(matrix: number[][]){
 // Get cofactor according to position in matrix
 function getCofact(matrix: number[][], rowNum: number, colNum: number) : number{
 
+    console.log()
     console.log('matrix= ' + matrix)
     console.log('row: '+rowNum+ ' col: '+colNum)
-    let copy = [...matrix];
 
     // Remove the given row
-    copy.splice(rowNum, 1)
+    let rowRemoved = matrix.slice(rowNum, rowNum+1);
 
     // Remove the given column
-    copy.map((val)=>{
+    let colRemoved = rowRemoved.map((val)=>{
         console.log('val= '+ val)
-        val.splice(colNum, 1)
+        val.slice(colNum, colNum+1)
     })
 
-    console.log('submatrix= ' +copy);
+    console.log('submatrix= ' +colRemoved);
 
-    return det(copy);
+    return det(matrix);
 }
 
 // Call the function
