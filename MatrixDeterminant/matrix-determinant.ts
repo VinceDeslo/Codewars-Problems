@@ -1,61 +1,56 @@
 export function determinant(matrix: number[][]) {
-    
+
+    // 1x1 and 2x2 matrix guard
+    if(matrix[0].length === 1) return matrix[0][0];
+    if(matrix[0].length === 2) return simpleDet(matrix);
+
     // Initialize a result variable
     let res: number = 0;
-    let sign: number = -1;
 
-    // 2x2 matrix guard
-    if(matrix[0].length === 2) return det(matrix);
+    // Iterate over every column value
+    for (let j=0; j< matrix[0].length; j++){
 
-    // Clone the matrix
-    let copy = [...matrix];
+            // Recursively continue calculating submatrixes
+            let val = determinant(getCofact(matrix, 0, j));
 
-    // Iterate over the rows
-    for(let i=0; i < matrix.length; i++){
-
-        // Iterate over the columns
-        for (let j=0; j< matrix[i].length; j++){
-
-            // Multiply by the sign according to position
-            if(i % 2) sign*=-1;
-
-            // Calculate the minor determinant (cofactor)
-            res += sign*getCofact(copy, i, j);
-        }
+            // result = sign * coefficient * det(submatrix) 
+            res += ((j % 2)? -1: 1) * matrix[0][j] * val;
     }
-
-    // Default return (2x2)
     return res;
 }
 
-// Simple determinant
-function det(matrix: number[][]){
 
-    console.log('determinant of: ' + matrix)
+// Simple determinant
+function simpleDet(matrix: number[][]){
+
     return matrix[0][0] * matrix[1][1] -matrix[0][1] * matrix[1][0];
 }
 
-// Get cofactor according to position in matrix
-function getCofact(matrix: number[][], rowNum: number, colNum: number) : number{
 
-    console.log()
-    console.log('matrix= ' + matrix)
-    console.log('row: '+rowNum+ ' col: '+colNum)
+// Get submatrix according to position in matrix
+function getCofact(matrix: number[][], rowNum: number, colNum: number) : number[][] {
 
-    // Remove the given row
-    let rowRemoved = matrix.slice(rowNum, rowNum+1);
+    // Clone the matrix (deep copy)
+    let copy = matrix.map((row) => [...row]);
 
-    // Remove the given column
-    let colRemoved = rowRemoved.map((val)=>{
-        console.log('val= '+ val)
-        val.slice(colNum, colNum+1)
-    })
+    // Remove the given row and column
+    copy.splice(rowNum, 1);
+    copy.map((val)=> val.splice(colNum, 1));
 
-    console.log('submatrix= ' +colRemoved);
-
-    return det(matrix);
+    // Return the submatrix
+    return copy;
 }
 
-// Call the function
-console.log(determinant([[1,3,4], [2,5,7], [4,6,8]]));
-  
+//Call the function
+console.log(determinant([[1, 3], 
+                         [2, 5]]));
+
+console.log(determinant([[2, 5, 3], 
+                        [1, -2, -1], 
+                        [1, 3, 4]]));
+
+console.log(determinant([[1, 2, 3, 4], 
+                         [5, 6, 7, 8], 
+                         [9, 10, 11, 12], 
+                         [13, 14, 15, 16]]));
+
