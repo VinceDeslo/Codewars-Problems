@@ -1,13 +1,36 @@
-export function findUniq(arr: number[]): number {
+// The following algorithm uses a .sort() approach.
+export function findUniq(input: number[]): number {
 
-    // Find the duplicates
-    let num: number[] = arr.filter(
-        (num, i, arr) => arr.indexOf(num) !== i);
+    // Input guard 
+    if(!input?.length) {
+        console.log('Provided array is invalid.')
+        return null;
+    }
 
-    // Return the unique number
-    return arr.find(val => val !== num[0]);
+    // Sort the array with worst case O(nlogn) assuming a merge-sort    
+    // Performance will vary depending on browser engines 
+    input.sort()
+    
+    // Find and return the unique value
+    return (input[0] == input[1])
+        ? input[input.length - 1] 
+        : input[0]
 }
 
-// Call function    
+
+/* 
+Other possible implementations include:
+
+return input.find(el => input.indexOf(el) === input.lastIndexOf(el));
+
+return input.filter((el) => input.indexOf(el) == input.lastIndexOf(el))[0];
+
+These tend to be more verbose and decrease readability yet offer more compact code. 
+Furthermore, they require additional method calls which will impact performance.
+*/
+
+
+// Test cases
+console.log(findUniq([]));    
 console.log(findUniq([ 1, 1, 1, 2, 1, 1 ]));
 console.log(findUniq([ 0, 0, 0.55, 0, 0 ]));
