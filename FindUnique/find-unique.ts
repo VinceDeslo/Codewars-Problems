@@ -26,7 +26,7 @@ return input.find(el => input.indexOf(el) === input.lastIndexOf(el));
 return input.filter((el) => input.indexOf(el) == input.lastIndexOf(el))[0];
 
 These tend to be more verbose and decrease readability yet offer more compact code. 
-Furthermore, they require additional method calls which will impact performance.
+Furthermore, they require additional method calls for index fetching which will impact performance.
 */
 
 
